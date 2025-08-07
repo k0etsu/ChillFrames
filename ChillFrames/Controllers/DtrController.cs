@@ -22,9 +22,9 @@ public class DtrController : IDisposable {
     public void Dispose() 
         => dtrEntry.Remove();
 
-    private void DtrOnClick(AddonMouseEventData eventData) {
-        switch (eventData) {
-            case { IsLeftClick: true }:
+    private void DtrOnClick(DtrInteractionEvent @event) {
+        switch (@event.AtkEventSource) {
+            case { IsLeftClick : true }:
                 if (Service.Condition.Any(ConditionFlag.InCombat)) return;
                 System.Config.PluginEnable = !System.Config.PluginEnable;
                 System.Config.Save();
